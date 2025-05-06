@@ -1,0 +1,18 @@
+# Oracle bağlantı ayarları
+connections/*.json
+
+# Geçici veya sistem dosyaları
+*.log
+*.tmp
+.DS_Store
+
+# VS Code ayarları 
+.vscode/
+
+# SQL Developer, JetBrains gibi tool'ların workspace dosyaları
+*.idea/
+*.iml
+
+# Yedek dosyalar
+*~ 
+*.bak
