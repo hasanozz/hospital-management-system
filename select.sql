@@ -1,1 +1,0 @@
-SELECT * FROM Patients ORDER BY patient_id DESC;
