@@ -83,17 +83,23 @@ python hospital_gui.py
 
 ```
 hospital-management-system/
-├── gui/
-│   └── hospital_gui.py
-├── sql_scripts/
-│   ├── create_tables.sql
-│   ├── create_constraints.sql
+├── hospital_gui.py
+├── packages
 │   ├── patient_pkg.sql
-│   ├── payment_pkg.sql
-│   ├── trg_admission_log.sql
+│   └── payment_pkg.sql
+├── procedures
 │   └── remove_duplicates.sql
+├── queries
+│   └── dynamic_select_examples.sql
+├── tables
+│   ├── create_constraints.sql
+│   └── create_tables.sql
+├── triggers
+│   └── trg_admission_log.sql
 ├── .gitignore
+├── e-r.pdf
 └── README.md
+
 ```
 
 ---
