@@ -1,8 +1,8 @@
 # 🏥 Hospital Management System
 
-This repository contains a **Hospital Management System** developed as an academic project using **Oracle SQL/PLSQL** and **Python (Tkinter)** for the graphical user interface.
+This repository contains a Hospital Management System developed as an academic project using Oracle SQL/PLSQL and Python (Tkinter) for the graphical user interface.
 
-It provides functionalities to manage patient admissions, doctor records, payments, medical records, and departmental data in a structured database environment.
+It allows users to efficiently manage patient admissions, doctor records, payments, medical records, and departmental data in a structured and user-friendly database environment.
 
 ---
 
@@ -10,29 +10,29 @@ It provides functionalities to manage patient admissions, doctor records, paymen
 
 ### 📚 Database (Oracle SQL/PLSQL)
 
-* **Database Normalization**: Designed with 12 relational tables adhering to **3rd Normal Form (3NF)**.
-* **Integrity Constraints**: Implemented proper **Primary Keys**, **Foreign Keys**, and **Composite Keys**.
+* **Database Normalization**: Designed using 12 relational tables that meet **3rd Normal Form (3NF)** requirements.
+* **Integrity Constraints**: Includes well-defined **Primary Keys**, **Foreign Keys**, and **Composite Keys**.
 * **PL/SQL Packages**:
 
-  * `Patient_Pkg`: CRUD operations for patients.
-  * `Payment_Pkg`: Handles payments, marking payments as paid, and deletion.
-* **Trigger**: Audit logging for admissions via `Admission_Log` table.
-* **Dynamic Queries**: Demonstrates advanced query operations with variable filters.
-* **Procedures**: Removal of duplicate patient records.
+  * `Patient_Pkg`: Manages patient-related operations (add, update, delete).
+  * `Payment_Pkg`: Handles payment operations and statuses.
+* **Trigger**: Records audit logs for patient admissions using the `Admission_Log` table.
+* **Dynamic Queries**: Various query examples provided in `queries/dynamic_select_examples.sql`.
+* **Procedures**: Includes a procedure to remove duplicate patient entries.
 
 ### 🖥️ Python GUI (Tkinter)
 
-* **User Login**: Secure login prompt for Oracle credentials.
-* **Modular GUI**:
+* **User Login**: Secure Oracle database login.
+* **Modular GUI Components**:
 
-  * Patient management (Add/View/Edit/Delete)
-  * Doctor management (including department selection)
+  * Patient management (add, view, edit, delete)
+  * Doctor management with department selection
   * Department management
   * Medical records management
-  * Payment management (Add, View, Mark as Paid)
-  * Admission management (patient admissions, discharges, room assignments)
-* **Dynamic Record Searching**: Filter records by multiple fields.
-* **Enhanced User Experience**: Date selection using `tkcalendar` with formatted inputs.
+  * Payment management (add, view, mark as paid)
+  * Admission management (admission, discharge, room allocation)
+* **Search and Filter**: Allows dynamic searching by patient, doctor, or payment details.
+* **User-friendly Inputs**: Includes calendar-based date entry using `tkcalendar`.
 
 ---
 
@@ -40,13 +40,13 @@ It provides functionalities to manage patient admissions, doctor records, paymen
 
 ### 📦 Requirements
 
-* **Oracle Database**: Oracle XE (21c tested)
-* **Python Version**: Python 3.10 or higher
-* **Python Libraries**:
+* Oracle Database (Oracle XE 21c recommended)
+* Python 3.10 or newer
+* Python libraries:
 
-```bash
-pip install tkcalendar cx_Oracle
-```
+  ```bash
+  pip install tkcalendar cx_Oracle
+  ```
 
 ### 🔧 Installation
 
@@ -56,30 +56,32 @@ pip install tkcalendar cx_Oracle
 git clone https://github.com/hasanozz/hospital-management-system.git
 ```
 
-2. **Setup Oracle Database**:
+2. **Setup Oracle Database:**
 
-* Execute all SQL scripts located in the `sql_scripts/` directory in order:
+Run the SQL scripts in the given order from their respective folders:
 
-  * `create_tables.sql`
-  * `create_constraints.sql`
-  * `patient_pkg.sql`
-  * `payment_pkg.sql`
-  * `trg_admission_log.sql`
-  * `remove_duplicates.sql`
+```bash
+tables/create_tables.sql
+tables/create_constraints.sql
+packages/patient_pkg.sql
+packages/payment_pkg.sql
+triggers/trg_admission_log.sql
+procedures/remove_duplicates.sql
+```
 
-3. **Configure Python Application:**
+3. **Run Python Application:**
 
-* Navigate to the `gui/` directory and run:
+Navigate to the project root folder and execute:
 
 ```bash
 python hospital_gui.py
 ```
 
-* Enter your Oracle SYSTEM password at runtime.
+Enter your Oracle SYSTEM password when prompted.
 
 ---
 
-## 🗂️ Project Structure
+## 📌 Project Structure
 
 ```
 hospital-management-system/
@@ -99,8 +101,21 @@ hospital-management-system/
 ├── .gitignore
 ├── e-r.pdf
 └── README.md
-
 ```
+
+---
+
+## 📐 ER Diagram
+
+The database follows a clear and structured design:
+
+* **Patients**: Personal and contact details.
+* **Doctors**: Associated with departments, managing appointments.
+* **Appointments**: Linked to patients and doctors.
+* **Departments**: Doctors are assigned here.
+* **Admissions & Rooms**: Tracks patient admissions, room allocation.
+* **Medical Records & Prescriptions**: Detailed patient health records.
+* **Payments**: Financial tracking related to patients.
 
 ---
 
@@ -109,5 +124,3 @@ hospital-management-system/
 * **GitHub:** [@hasanozz](https://github.com/hasanozz)
 
 ---
-
-**Note:** This project was developed strictly for educational purposes and should not be used in production environments.
