@@ -1,33 +1,3 @@
--- Hasta işlemleri için paket tanımı ve gövdesi
-
--- Paket tanımı (interfaz)
-CREATE OR REPLACE PACKAGE Patient_Pkg AS
-  PROCEDURE Add_Patient(
-    p_first_name     IN VARCHAR2,
-    p_last_name      IN VARCHAR2,
-    p_date_of_birth  IN DATE,
-    p_gender         IN VARCHAR2,
-    p_contact_number IN VARCHAR2,
-    p_address        IN VARCHAR2
-  );
-
-  PROCEDURE Update_Patient(
-    p_patient_id     IN NUMBER,
-    p_first_name     IN VARCHAR2,
-    p_last_name      IN VARCHAR2,
-    p_date_of_birth  IN DATE,
-    p_gender         IN VARCHAR2,
-    p_contact_number IN VARCHAR2,
-    p_address        IN VARCHAR2
-  );
-
-  PROCEDURE Delete_Patient(
-    p_patient_id IN NUMBER
-  );
-END Patient_Pkg;
-/
-
--- Paket gövdesi (uygulama)
 CREATE OR REPLACE PACKAGE BODY Patient_Pkg AS
 
   PROCEDURE Add_Patient(
@@ -72,8 +42,10 @@ CREATE OR REPLACE PACKAGE BODY Patient_Pkg AS
     p_patient_id IN NUMBER
   ) IS
   BEGIN
-    DELETE FROM Patients
-    WHERE patient_id = p_patient_id;
+    UPDATE Medical_Records SET patient_id = NULL WHERE patient_id = p_patient_id;
+    DELETE FROM Admissions WHERE patient_id = p_patient_id;
+    DELETE FROM Payments WHERE patient_id = p_patient_id;
+    DELETE FROM Patients WHERE patient_id = p_patient_id;
   END Delete_Patient;
 
 END Patient_Pkg;

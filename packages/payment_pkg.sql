@@ -1,80 +1,44 @@
--- Hasta işlemleri için paket tanımı ve gövdesi
-
--- Paket tanımı (interfaz)
-CREATE OR REPLACE PACKAGE Patient_Pkg AS
-  PROCEDURE Add_Patient(
-    p_first_name     IN VARCHAR2,
-    p_last_name      IN VARCHAR2,
-    p_date_of_birth  IN DATE,
-    p_gender         IN VARCHAR2,
-    p_contact_number IN VARCHAR2,
-    p_address        IN VARCHAR2
+CREATE OR REPLACE PACKAGE Payment_Pkg AS
+  PROCEDURE Add_Payment(
+    p_patient_id  IN NUMBER,
+    p_amount      IN NUMBER,
+    p_due_date    IN VARCHAR2,
+    p_description IN VARCHAR2
   );
 
-  PROCEDURE Update_Patient(
-    p_patient_id     IN NUMBER,
-    p_first_name     IN VARCHAR2,
-    p_last_name      IN VARCHAR2,
-    p_date_of_birth  IN DATE,
-    p_gender         IN VARCHAR2,
-    p_contact_number IN VARCHAR2,
-    p_address        IN VARCHAR2
-  );
-
-  PROCEDURE Delete_Patient(
-    p_patient_id IN NUMBER
-  );
-END Patient_Pkg;
+  PROCEDURE Mark_As_Paid(p_payment_id IN NUMBER);
+  PROCEDURE Delete_Payment(p_payment_id IN NUMBER);
+END Payment_Pkg;
 /
 
--- Paket gövdesi (uygulama)
-CREATE OR REPLACE PACKAGE BODY Patient_Pkg AS
+CREATE OR REPLACE PACKAGE BODY Payment_Pkg AS
 
-  PROCEDURE Add_Patient(
-    p_first_name     IN VARCHAR2,
-    p_last_name      IN VARCHAR2,
-    p_date_of_birth  IN DATE,
-    p_gender         IN VARCHAR2,
-    p_contact_number IN VARCHAR2,
-    p_address        IN VARCHAR2
+  PROCEDURE Add_Payment(
+    p_patient_id  IN NUMBER,
+    p_amount      IN NUMBER,
+    p_due_date    IN VARCHAR2,
+    p_description IN VARCHAR2
   ) IS
   BEGIN
-    INSERT INTO Patients (
-      first_name, last_name, date_of_birth, gender,
-      contact_number, address
+    INSERT INTO Payments (
+      patient_id, amount, payment_date
     ) VALUES (
-      p_first_name, p_last_name, p_date_of_birth, p_gender,
-      p_contact_number, p_address
+      p_patient_id, p_amount, TO_DATE(p_due_date, 'YYYY-MM-DD')
     );
-  END Add_Patient;
+  END Add_Payment;
 
-  PROCEDURE Update_Patient(
-    p_patient_id     IN NUMBER,
-    p_first_name     IN VARCHAR2,
-    p_last_name      IN VARCHAR2,
-    p_date_of_birth  IN DATE,
-    p_gender         IN VARCHAR2,
-    p_contact_number IN VARCHAR2,
-    p_address        IN VARCHAR2
-  ) IS
+  PROCEDURE Mark_As_Paid(p_payment_id IN NUMBER) IS
   BEGIN
-    UPDATE Patients
-    SET first_name     = p_first_name,
-        last_name      = p_last_name,
-        date_of_birth  = p_date_of_birth,
-        gender         = p_gender,
-        contact_number = p_contact_number,
-        address        = p_address
-    WHERE patient_id = p_patient_id;
-  END Update_Patient;
+    UPDATE Payments
+    SET payment_date = SYSDATE
+    WHERE payment_id = p_payment_id;
+  END Mark_As_Paid;
 
-  PROCEDURE Delete_Patient(
-    p_patient_id IN NUMBER
-  ) IS
+  PROCEDURE Delete_Payment(p_payment_id IN NUMBER) IS
   BEGIN
-    DELETE FROM Patients
-    WHERE patient_id = p_patient_id;
-  END Delete_Patient;
+    DELETE FROM Payments
+    WHERE payment_id = p_payment_id;
+  END Delete_Payment;
 
-END Patient_Pkg;
+END Payment_Pkg;
 /

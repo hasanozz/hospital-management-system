@@ -1,6 +1,6 @@
--- Hasta yatışı yapıldığında Admission_Log tablosuna otomatik log ekleyen trigger
+DROP TRIGGER TRG_ADMISSION_INSERT_LOG;
 
-CREATE OR REPLACE TRIGGER trg_admission_insert_log
+CREATE OR REPLACE TRIGGER TRG_ADMISSION_INSERT_LOG
 AFTER INSERT ON Admissions
 FOR EACH ROW
 BEGIN
